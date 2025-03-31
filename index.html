@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_top">
+</head>
+<body>
+    <!-- Form to input YouTube channel username -->
+    <!-- Formulário para inserir o nome de usuário do canal do YouTube -->
+    <form id="channelForm">
+        <!-- Label and input for channel username -->
+        <!-- Rótulo e campo de entrada para o nome de usuário do canal -->
+        <label for="channelUsername">Nome de usuário do canal: | Channel username:</label>
+        <input type="text" id="channelUsername" name="channelUsername">
+        <!-- Button to submit the form -->
+        <!-- Botão para enviar o formulário -->
+        <button type="button" onclick="submitForm()">Obter Links | Get Links</button>
+    </form>
+    <!-- Div to display video links -->
+    <!-- Div para exibir os links dos vídeos -->
+    <div id="videoLinks"></div>
+
+    <script>
+        // Function to handle form submission
+        // Função para lidar com o envio do formulário
+        function submitForm() {
+            var channelUsername = document.getElementById('channelUsername').value;
+            google.script.run.withSuccessHandler(displayVideoLinks).getYouTubeVideoLinks(channelUsername);
+        }
+
+        // Function to display video links
+        // Função para exibir os links dos vídeos
+        function displayVideoLinks(links) {
+            var videoLinksDiv = document.getElementById('videoLinks');
+            videoLinksDiv.innerHTML = '<strong>Links dos vídeos obtidos: | Video links obtained:</strong><br>' + links.join('<br>');
+        }
+    </script>
+</body>
+</html>
